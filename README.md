@@ -46,6 +46,16 @@ conda list | grep -E "(petsc|mpi|blas|parmetis|metis)"
 echo $CONDA_PREFIX  # Verify conda environment path
 ```
 
+if you install correctly, you may get the output like this.
+
+```
+echo $CONDA_PREFIX
+```
+output
+```
+/Users/User_name/miniforge3/envs/Deneb
+```
+
 ### 4. Environment Setup
 ```
 # Activate conda environment
