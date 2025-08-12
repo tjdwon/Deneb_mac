@@ -131,6 +131,10 @@ export PETSC_ARCH=""
 
 You should also set up the c_cpp_properties.json, settings.json (uploaded in repository)
 
+0. make c_cpp_properties.json, settings.json
+1. Cmd + Shift + P → Python: Select Interpreter
+2. choose Deneb env: /Users/ksw/miniforge3/envs/Deneb/bin/python
+
 ### Optional: Permanent Setup
 
 Add to your ~/.zshrc or ~/.bash_profile:
