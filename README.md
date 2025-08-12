@@ -3,6 +3,8 @@ Deneb for mac os (Apple Silicon M1/M2/M3 etc)
 
 NOTE: Not for Intel mac os
 
+I use vscode for modifying this code. 
+
 # Overview
 This repository provides a complete(maybe..) guide and setup for the DENEB on macOS (Apple Silicon; M1, M2, M3). 
 DENEB is a high-order finite element CFD solver that requires complex scientific computing libraries including MPI, PETSc, and OpenBLAS.
@@ -12,6 +14,29 @@ I used 'conda' to install external libraries on my Mac by configuring environmen
 However, due to Apple Silicon's ARM architecture, I encountered significant compatibility issues with Windows for ARM, specifically failing to install msmpi. While Parallels could have been an alternative solution, I chose not to test it. Consequently, I decided to use conda for managing my external library dependencies instead.)
 
 # Installation
+
+### 0. Install Mini-forge (ARM64)
+
+```
+curl -L https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh -o miniforge.sh
+chmod +x miniforge.sh
+bash miniforge.sh
+```
+Install Path: default(~/miniforge3) recommended
+Path added: choose 'yes'
+conda init: choose 'yes'
+
+Then check the version
+```
+conda --version
+
+uname -m
+```
+
+You should re-open the terminal or use this code before step 2
+```
+source ~/.zshrc 
+```
 
 ### 1. Create Conda Environment
 
@@ -39,6 +64,38 @@ conda install -c conda-forge \
     gfortran_impl_osx-arm64
 ```
 
+check
+```
+mpicc --version
+mpicxx --version
+
+mpirun --version
+```
+
+Then install 'IDEA' library
+```
+git clone https://github.com/HojunYouKr/IDEA.git
+cd IDEA
+```
+Modify the Makefile of 'IDEA' (I modified it already)
+Then compile IDEA 
+
+```
+make clean
+make all
+```
+
+```
+# install in conda env
+cp library/libidea.a $CONDA_PREFIX/lib/
+cp include/*.h $CONDA_PREFIX/include/
+
+# check
+ls $CONDA_PREFIX/lib/libidea.a
+ls $CONDA_PREFIX/include/ | grep -i idea
+```
+
+
 ### 3. Verify Installation
 ```
 # Check installed packages
@@ -57,6 +114,8 @@ output
 ```
 
 ### 4. Environment Setup
+
+Following this way
 ```
 # Activate conda environment
 conda activate Deneb
@@ -69,6 +128,8 @@ export C_INCLUDE_PATH="$CONDA_PREFIX/include:$C_INCLUDE_PATH"
 export PETSC_DIR=$CONDA_PREFIX
 export PETSC_ARCH=""
 ```
+
+You should also set up the c_cpp_properties.json, settings.json (uploaded in repository)
 
 ### Optional: Permanent Setup
 
