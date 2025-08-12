@@ -1,5 +1,6 @@
 # Deneb_mac
 Deneb for mac os (Apple Silicon M1/M2/M3 etc)
+Plz refer this original Deneb (https://github.com/HojunYouKr/Deneb)
 
 NOTE: Not for Intel mac os
 
